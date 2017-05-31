@@ -1,0 +1,7 @@
+﻿{
+    "ServiceMerchantAuth": {
+        "Db": {
+            "AuthConnString": "UseDevelopmentStorage=true"
+        } 
+    } 
+}
