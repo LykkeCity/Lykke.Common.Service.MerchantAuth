@@ -23,5 +23,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Lykke.Common.Service.MerchantAuth.Business\Lykke.Common.Service.MerchantAuth.Business.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
