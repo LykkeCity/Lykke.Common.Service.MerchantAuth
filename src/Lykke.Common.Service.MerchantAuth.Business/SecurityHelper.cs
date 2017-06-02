@@ -16,7 +16,7 @@ namespace Lykke.Common.Service.MerchantAuth.Business
         public SecurityErrorType CheckRequest(string strToSign, string merchantId, string sign, string publicKey, string apiKey)
         {
 
-            if (string.IsNullOrEmpty(merchantId) || merchantId != "1")
+            if (string.IsNullOrEmpty(merchantId))
             {
                 return SecurityErrorType.MerchantUnknown;
             }
