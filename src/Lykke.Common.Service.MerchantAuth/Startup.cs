@@ -6,6 +6,7 @@ using Lykke.AzureRepositories;
 using Lykke.Common.Service.MerchantAuth.Business;
 using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
 using Lykke.Common.Service.MerchantAuth.Code;
+using Lykke.Core.Log;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -39,7 +40,7 @@ namespace Lykke.Common.Service.MerchantAuth
         private void BuildConfiguration(IServiceCollection services)
         {
             var connectionString = Configuration.GetValue<string>("ConnectionString");
-#if DEBUG
+#if !DEBUG
             var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(connectionString);
 #else
             var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(new Uri(connectionString));
@@ -48,7 +49,7 @@ namespace Lykke.Common.Service.MerchantAuth
 
             services.AddSingleton(settings);
             services.AddSingleton<ISecurityHelper>(new SecurityHelper());
-            services.RegisterRepositories(settings.Db.AuthConnString, null);
+            services.RegisterRepositories(settings.Db.AuthConnString, (ILog)null);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

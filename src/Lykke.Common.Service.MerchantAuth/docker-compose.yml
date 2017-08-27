@@ -2,8 +2,8 @@ version: '2'
 
 services:
   apirunner:
-    image: lykkex/commonserviceauth
+    image: lykkex/commonserviceauth:dev
     ports:
      - "80:3001"
     environment:
-     - ConnectionString=UseDevelopmentStorage=true
+     - ConnectionString=http://52.166.240.172/asdlkasjdasjkdlasd_ServiceMerchantAuth
