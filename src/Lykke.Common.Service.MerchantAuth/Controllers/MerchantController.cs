@@ -20,7 +20,7 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
             _merchantRepository = merchantRepository;
         }
 
-        [HttpGet("merchant/clientId/{merchantId}")]
+        [HttpGet("clientId/{merchantId}")]
         public async Task<IActionResult> Get(string merchantId)
         {
             var merchant = await _merchantRepository.GetAsync(merchantId);
