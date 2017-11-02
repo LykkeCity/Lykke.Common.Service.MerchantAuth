@@ -24,7 +24,7 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
         public async Task<IActionResult> Get(string merchantId)
         {
             var merchant = await _merchantRepository.GetAsync(merchantId);
-            return Content(merchant.LykkeWalletKey);
+            return Json(merchant);
         }
 
     }
