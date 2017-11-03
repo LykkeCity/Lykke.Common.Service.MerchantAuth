@@ -41,7 +41,7 @@ namespace Lykke.Common.Service.MerchantAuth
         {
             var connectionString = Configuration.GetValue<string>("ConnectionString");
 #if DEBUG
-            var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(connectionString);
+            var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(new Uri(connectionString));
 #else
             var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(new Uri(connectionString));
 #endif
