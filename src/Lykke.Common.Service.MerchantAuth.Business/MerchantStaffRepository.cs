@@ -13,7 +13,8 @@ namespace Lykke.Common.Service.MerchantAuth.Business
     public class MerchantStaffRepository
     {
         private readonly INoSQLTableStorage<MerchantStaff> _tableStorage;
-        public MerchantStaffRepository(AzureTableStorage<MerchantStaff> tableStorage)
+
+        public MerchantStaffRepository(INoSQLTableStorage<MerchantStaff> tableStorage)
         {
             _tableStorage = tableStorage;
         }
