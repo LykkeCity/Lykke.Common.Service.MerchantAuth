@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Lykke.Common.Entities" Version="1.0.31" />
+    <PackageReference Include="Lykke.AzureStorage" Version="3.0.3" />
+    <PackageReference Include="Lykke.Common.Entities" Version="1.0.34" />
+    <PackageReference Include="Lykke.Pay.Common.Entities" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

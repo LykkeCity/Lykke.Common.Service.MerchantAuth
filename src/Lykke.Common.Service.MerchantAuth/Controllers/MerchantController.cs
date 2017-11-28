@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Lykke.Common.Entities.Security;
-using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
+﻿using System.Threading.Tasks;
+using Lykke.Common.Service.MerchantAuth.Business;
+using Lykke.Common.Service.MerchantAuth.Models;
 using Lykke.Core;
+using Lykke.Pay.Common.Entities.Entities;
+using Lykke.Pay.Common.Entities.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Lykke.Common.Service.MerchantAuth.Controllers
 {
@@ -14,10 +12,12 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
     public class MerchantController : Controller
     {
         private readonly IMerchantRepository _merchantRepository;
+        private readonly MerchantStaffRepository _merchantStaffRepository;
 
-        public MerchantController(IMerchantRepository merchantRepository)
+        public MerchantController(IMerchantRepository merchantRepository, MerchantStaffRepository merchantStaffRepository)
         {
             _merchantRepository = merchantRepository;
+            _merchantStaffRepository = merchantStaffRepository;
         }
 
         [HttpGet("clientId/{merchantId}")]
@@ -27,5 +27,33 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
             return Json(merchant);
         }
 
+
+        [HttpPost("staffSignIn")]
+        public async Task<IMerchantStaff> StaffSignInPost([FromBody]MerchantStaffSignInRequest request)
+        {
+            if (string.IsNullOrEmpty(request?.Login) || request.Password == null)
+            {
+                return null;
+            }
+
+            var staff = await _merchantStaffRepository.GetMerchantStaffByEmail(request.Login);
+            if (!request.Password.Equals(staff?.MerchantStaffPassword))
+            {
+                return null;
+            }
+
+            return staff;
+            
+        }
+
+        [HttpPost("staffSignOn")]
+        public async Task<IMerchantStaff> StaffSignOnPost([FromBody]MerchantStaff request)
+        {
+            if (await _merchantStaffRepository.SaveMerchantStaff(request))
+            {
+                return request;
+            }
+            return null;
+        }
     }
 }
