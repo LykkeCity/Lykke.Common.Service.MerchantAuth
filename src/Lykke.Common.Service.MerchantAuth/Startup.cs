@@ -42,8 +42,8 @@ namespace Lykke.Common.Service.MerchantAuth
 
         private void BuildConfiguration(IServiceCollection services)
         {
-            var connectionString = Configuration.GetValue<string>("ConnectionString");
-            var generalSettings = Configuration.LoadSettings<Settings>();
+            //var connectionString = Configuration.GetValue<string>("ConnectionString");
+            var generalSettings = Configuration.LoadSettings<Settings>("ConnectionString");
             
 
             var settings = generalSettings.Nested(n=>n.ServiceMerchantAuth);

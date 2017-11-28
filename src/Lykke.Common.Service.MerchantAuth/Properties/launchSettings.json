@@ -1,10 +1,10 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-        "applicationUrl": "http://localhost:3004/",
-        "sslPort": 0
+      "applicationUrl": "http://localhost:3004/",
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -13,17 +13,18 @@
       "launchBrowser": true,
       "launchUrl": "api/auth",
       "environmentVariables": {
+        "ServiceUrl": "https://settings-test-k8s.lykkex.net/qpowieujnajkhfbn79Hh_ServiceMerchantAuth",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "Lykke.Common.Service.MerchantAuth": {
-        "commandName": "Project",
-        "launchBrowser": true,
-        "launchUrl": "api/auth",
-        "environmentVariables": {
-            "ASPNETCORE_ENVIRONMENT": "Development"
-        },
-        "applicationUrl": "http://localhost:3004"
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "api/auth",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:3004"
     }
   }
 }
