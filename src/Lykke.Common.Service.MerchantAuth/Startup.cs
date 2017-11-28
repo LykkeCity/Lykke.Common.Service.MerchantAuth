@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AzureStorage.Tables;
 using Lykke.AzureRepositories;
 using Lykke.Common.Service.MerchantAuth.Business;
 using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
+using Lykke.Common.Service.MerchantAuth.Business.Models;
 using Lykke.Common.Service.MerchantAuth.Code;
 using Lykke.Core.Log;
+using Lykke.SettingsReader;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -40,16 +43,19 @@ namespace Lykke.Common.Service.MerchantAuth
         private void BuildConfiguration(IServiceCollection services)
         {
             var connectionString = Configuration.GetValue<string>("ConnectionString");
-#if DEBUG
-            var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(new Uri(connectionString));
-#else
-            var generalSettings = SettingsReader.SettingsReader.ReadGeneralSettings<Settings>(new Uri(connectionString));
-#endif
-            var settings = generalSettings.ServiceMerchantAuth;
+            var generalSettings = Configuration.LoadSettings<Settings>();
+            
 
-            services.AddSingleton(settings);
+            var settings = generalSettings.Nested(n=>n.ServiceMerchantAuth);
+
+            services.AddSingleton(settings.CurrentValue);
             services.AddSingleton<ISecurityHelper>(new SecurityHelper());
-            services.RegisterRepositories(settings.Db.AuthConnString, (ILog)null);
+            services.AddSingleton<IHealthService>(new HealthService(TimeSpan.FromSeconds(30)));
+            services.RegisterRepositories(settings.CurrentValue.Db.AuthConnString, (ILog)null);
+
+
+            services.AddSingleton(new MerchantStaffRepository
+                    (AzureTableStorage<MerchantStaff>.Create(settings.Nested(s=>s.Db.AuthConnString), "MerchantsStaff", null)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
