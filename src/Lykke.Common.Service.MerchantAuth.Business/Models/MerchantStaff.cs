@@ -19,6 +19,7 @@ namespace Lykke.Common.Service.MerchantAuth.Business.Models
             MerchantStaffFirstName = staff.MerchantStaffFirstName;
             MerchantStaffLastName = staff.MerchantStaffLastName;
             MerchantStaffPassword = staff.MerchantStaffPassword;
+            LwId = staff.LwId;
             ETag = "*";
         }
 
@@ -37,5 +38,6 @@ namespace Lykke.Common.Service.MerchantAuth.Business.Models
         public string MerchantStaffFirstName { get; set; }
         public string MerchantStaffLastName { get; set; }
         public string MerchantStaffPassword { get; set; }
+        public string LwId { get; set; }
     }
 }

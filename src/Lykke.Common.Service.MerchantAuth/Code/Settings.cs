@@ -13,6 +13,7 @@ namespace Lykke.Common.Service.MerchantAuth.Code
     public class ServiceMerchantAuthSettings
     {
         public DbSettings Db { get; set; }
+        public string BalanceService { get; set; }
     }
 
     public class DbSettings

@@ -9,6 +9,7 @@ using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
 using Lykke.Common.Service.MerchantAuth.Business.Models;
 using Lykke.Common.Service.MerchantAuth.Code;
 using Lykke.Core.Log;
+using Lykke.Service.Balances.Client;
 using Lykke.SettingsReader;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,6 +57,8 @@ namespace Lykke.Common.Service.MerchantAuth
 
             services.AddSingleton(new MerchantStaffRepository
                     (AzureTableStorage<MerchantStaff>.Create(settings.Nested(s=>s.Db.AuthConnString), "MerchantsStaff", null)));
+
+            services.AddSingleton<IBalancesClient>(new BalancesClient(settings.Nested(s => s.BalanceService).CurrentValue, null));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

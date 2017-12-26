@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Lykke.Common.Service.MerchantAuth.Business;
 using Lykke.Common.Service.MerchantAuth.Models;
 using Lykke.Core;
 using Lykke.Pay.Common.Entities.Entities;
 using Lykke.Pay.Common.Entities.Interfaces;
+using Lykke.Service.Balances.Client;
 using Microsoft.AspNetCore.Mvc;
+using MerchantStaff = Lykke.Common.Service.MerchantAuth.Business.Models.MerchantStaff;
 
 namespace Lykke.Common.Service.MerchantAuth.Controllers
 {
@@ -13,11 +16,13 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
     {
         private readonly IMerchantRepository _merchantRepository;
         private readonly MerchantStaffRepository _merchantStaffRepository;
+        private readonly IBalancesClient _balanceClient;
 
-        public MerchantController(IMerchantRepository merchantRepository, MerchantStaffRepository merchantStaffRepository)
+        public MerchantController(IMerchantRepository merchantRepository, MerchantStaffRepository merchantStaffRepository, IBalancesClient balanceClient)
         {
             _merchantRepository = merchantRepository;
             _merchantStaffRepository = merchantStaffRepository;
+            _balanceClient = balanceClient;
         }
 
         [HttpGet("clientId/{merchantId}")]
@@ -43,7 +48,49 @@ namespace Lykke.Common.Service.MerchantAuth.Controllers
             }
 
             return staff;
-            
+
+        }
+
+
+        [HttpGet("balance/{staffId}")]
+        public async Task<IMerchantBalance> GetMerchantBalance(string staffId)
+        {
+            if (string.IsNullOrEmpty(staffId))
+            {
+                return null;
+            }
+
+            var staff = await _merchantStaffRepository.GetMerchantStaffByEmail(staffId);
+            if (staff == null)
+            {
+                return null;
+            }
+
+            var merchant = await _merchantRepository.GetAsync(staff.MerchantId);
+
+            return await GetBalanceById(string.IsNullOrEmpty(merchant?.LwId) ? staff.LwId : merchant.LwId);
+
+
+        }
+
+        private async Task<IMerchantBalance> GetBalanceById(string lwId)
+        {
+            if (string.IsNullOrEmpty(lwId))
+            {
+                return null;
+            }
+
+            var balance = await _balanceClient.GetClientBalances(lwId);
+            var result = new MerchantBalance
+            {
+                Asserts = (from b in balance
+                    select new MerchantAssertBalance
+                    {
+                        Assert = b.AssetId,
+                        Value = b.Balance
+                    }).ToList()
+            };
+            return result;
         }
 
         [HttpPost("staffSignOn")]
