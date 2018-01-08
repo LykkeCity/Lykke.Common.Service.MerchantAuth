@@ -44,7 +44,7 @@ namespace Lykke.Common.Service.MerchantAuth
         private void BuildConfiguration(IServiceCollection services)
         {
             //var connectionString = Configuration.GetValue<string>("ConnectionString");
-            var generalSettings = Configuration.LoadSettings<Settings>("ConnectionString");
+            var generalSettings = Configuration.LoadSettings<Settings>();
             
 
             var settings = generalSettings.Nested(n=>n.ServiceMerchantAuth);
@@ -58,7 +58,7 @@ namespace Lykke.Common.Service.MerchantAuth
             services.AddSingleton(new MerchantStaffRepository
                     (AzureTableStorage<MerchantStaff>.Create(settings.Nested(s=>s.Db.AuthConnString), "MerchantsStaff", null)));
 
-            services.AddSingleton<IBalancesClient>(new BalancesClient(settings.Nested(s => s.BalanceService).CurrentValue, null));
+            services.AddSingleton<IBalancesClient>(new BalancesClient(generalSettings.Nested(s => s.BalancesServiceClient.ServiceUrl).CurrentValue, null));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
