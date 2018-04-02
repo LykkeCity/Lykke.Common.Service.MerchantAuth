@@ -5,9 +5,9 @@ using System.Net.Http;
 using System.Text;
 using Lykke.Common.Entities.Security;
 using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
-using Lykke.Common.Service.MerchantAuth.Business.Test.Models;
+using Lykke.Common.Service.MerchantAuth.Business.Tests.Models;
 
-namespace Lykke.Common.Service.MerchantAuth.Business.Test.Integrations
+namespace Lykke.Common.Service.MerchantAuth.Business.Tests.Integrations
 {
     public class WebSecurityHelper 
     {

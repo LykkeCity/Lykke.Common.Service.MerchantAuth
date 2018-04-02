@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Common.Service.MerchantAuth", "src\Lykke.Common.Service.MerchantAuth\Lykke.Common.Service.MerchantAuth.csproj", "{82D638C0-20BC-429E-8FB4-F777318E3864}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Common.Service.MerchantAuth.Business.Test", "tests\Lykke.Common.Service.MerchantAuth.Business.Test\Lykke.Common.Service.MerchantAuth.Business.Test.csproj", "{32115AC5-EE4F-4532-A9DC-C0843E3E8622}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Common.Service.MerchantAuth.Business.Tests", "tests\Lykke.Common.Service.MerchantAuth.Business.Test\Lykke.Common.Service.MerchantAuth.Business.Tests.csproj", "{32115AC5-EE4F-4532-A9DC-C0843E3E8622}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lykke.Common.Service.MerchantAuth.Business", "src\Lykke.Common.Service.MerchantAuth.Business\Lykke.Common.Service.MerchantAuth.Business.csproj", "{2C16FAF6-1FC8-454E-9B58-CAD52F56B87D}"
 EndProject
@@ -30,5 +30,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4B8448E-BF9A-4C71-870C-8066E42C150E}
 	EndGlobalSection
 EndGlobal

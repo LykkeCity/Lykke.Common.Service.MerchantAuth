@@ -1,6 +1,6 @@
 ﻿using Lykke.Common.Entities.Security;
 
-namespace Lykke.Common.Service.MerchantAuth.Business.Test.Models
+namespace Lykke.Common.Service.MerchantAuth.Business.Tests.Models
 {
     class IntegrationResult
     {

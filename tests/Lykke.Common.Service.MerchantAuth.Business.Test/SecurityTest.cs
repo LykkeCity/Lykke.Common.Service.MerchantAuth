@@ -5,10 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Lykke.Common.Entities.Security;
 using Lykke.Common.Service.MerchantAuth.Business.Interfaces;
-using Lykke.Common.Service.MerchantAuth.Business.Test.Integrations;
+using Lykke.Common.Service.MerchantAuth.Business.Tests.Integrations;
 using Xunit;
 
-namespace Lykke.Common.Service.MerchantAuth.Business.Test
+namespace Lykke.Common.Service.MerchantAuth.Business.Tests
 {
     public class SecurityTest 
     {
