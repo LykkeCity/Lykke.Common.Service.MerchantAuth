@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "launchUrl": "api/auth",
       "environmentVariables": {
-        "SettingsUrl": "https://settings-test-k8s.lykkex.net/qpowieujnajkhfbn79Hh_ServiceMerchantAuth",
+        "SettingsUrl": "",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
@@ -22,7 +22,7 @@
       "launchBrowser": true,
       "launchUrl": "api/auth",
       "environmentVariables": {
-        "SettingsUrl": "https://settings-test-k8s.lykkex.net/qpowieujnajkhfbn79Hh_ServiceMerchantAuth",
+        "SettingsUrl": "",
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "applicationUrl": "http://localhost:3004"
